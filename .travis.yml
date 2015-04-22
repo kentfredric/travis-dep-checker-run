@@ -1,0 +1,15 @@
+---
+language: perl
+matrix:
+  include:
+    - env: OPTS="perl=5.6.2 test_target=EXODIST/Test-Simple-1.001014.tar.gz test=ETHER/Moose-2.1404.tar.gz
+before_install:
+  - time git clone --depth 1 https://github.com/kentfredric/travis-dep-checker.git depcheck
+  - time perl depcheck/perl/opt_parse.pl
+  - time perl depcheck/perl/setup_perl.pl
+script:
+  - source ./perlenv
+  - perl -V
+  - "true"
+sudo: false
+
