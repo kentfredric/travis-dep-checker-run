@@ -1,11 +1,14 @@
 ---
-after_script: ~
+after_script:
+  - echo "Nothing to do here"
 before_install:
   - time git clone --depth 1 https://github.com/kentfredric/travis-dep-checker.git depcheck
   - time perl depcheck/perl/opt_parse.pl
   - time perl depcheck/perl/setup_perl.pl
-before_script: ~
-install: ~
+before_script:
+  - echo "Nothing to do here"
+install:
+  - echo "Nothing to do here"
 language: perl
 matrix:
   include:
