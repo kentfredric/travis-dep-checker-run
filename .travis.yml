@@ -8,13 +8,16 @@ before_install:
 before_script:
   - echo "Nothing to do here"
 install:
-  - echo "Nothing to do here"
+  - source ./perlenv
+  - source ./test_config.sh
+  - cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages ${test_target}
+  - cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages --installdeps ${test}
 language: perl
 matrix:
   include:
     - env: OPTS="perl=5.6.2 test_target=EXODIST/Test-Simple-1.001014.tar.gz test=ETHER/Moose-2.1404.tar.gz"
 script:
   - source ./perlenv
-  - perl -V
-  - true
+  - source ./test_config.sh
+  - cpanm -v --test-only --mirror http://cpan.metacpan.org/ --no-man-pages ${test}
 sudo: false
