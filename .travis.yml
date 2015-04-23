@@ -2,22 +2,31 @@
 after_script:
   - echo "Nothing to do here"
 before_install:
-  - time git clone --depth 1 https://github.com/kentfredric/travis-dep-checker.git depcheck
-  - time perl depcheck/perl/opt_parse.pl
-  - time perl depcheck/perl/setup_perl.pl
+  - git clone --depth 1 https://github.com/kentfredric/travis-dep-checker.git depcheck
+  - perl depcheck/perl/opt_parse.pl
+  - perl depcheck/perl/setup_perl.pl
 before_script:
   - echo "Nothing to do here"
 install:
   - source ./perlenv
   - source ./test_config.sh
-  - cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages ${test_target}
-  - cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages --installdeps ${test}
+  - 'cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages ${test_target}'
+  - 'cpanm --notest --quiet --mirror http://cpan.metacpan.org/ --no-man-pages --installdeps ${test}'
 language: perl
 matrix:
   include:
-    - env: OPTS="perl=5.10.1 test_target=EXODIST/Test-Simple-1.001014.tar.gz test=ETHER/Moose-2.1404.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=M/MS/MSCHWERN/Test-Simple-0.01.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-96.051501.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=M/MS/MSCHWERN/Test-Simple-0.01.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-2013.0523.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=M/MS/MSCHWERN/Test-Simple-0.68.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-96.051501.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=M/MS/MSCHWERN/Test-Simple-0.68.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-2013.0523.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=R/RJ/RJBS/Test-Simple-1.001002.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-96.051501.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=R/RJ/RJBS/Test-Simple-1.001002.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-2013.0523.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=E/EX/EXODIST/Test-Simple-1.301001_055.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-96.051501.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=E/EX/EXODIST/Test-Simple-1.301001_055.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-2013.0523.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=E/EX/EXODIST/Test-Simple-1.301001_107.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-96.051501.tar.gz"
+    - env: OPTS="perl=5.8.1 test_target=E/EX/EXODIST/Test-Simple-1.301001_107.tar.gz test=M/MU/MUIR/modules/Text-Tabs+Wrap-2013.0523.tar.gz"
 script:
   - source ./perlenv
   - source ./test_config.sh
-  - cpanm -v --test-only --mirror http://cpan.metacpan.org/ --no-man-pages ${test}
+  - 'cpanm -v --test-only --mirror http://cpan.metacpan.org/ --no-man-pages ${test}'
 sudo: false
